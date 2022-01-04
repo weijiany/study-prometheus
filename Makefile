@@ -13,3 +13,6 @@ exec:
 
 logs:
 	docker logs -f $(name)
+
+reload-prom:
+	curl -XPOST localhost:9090/-/reload

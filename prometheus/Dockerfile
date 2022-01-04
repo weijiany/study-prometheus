@@ -1,5 +1,4 @@
 FROM prom/prometheus:v2.31.1
-COPY . /etc/prometheus/
 ENTRYPOINT [ "/bin/prometheus" ]
 CMD        [ "--config.file=/etc/prometheus/prometheus.yml", \
              "--storage.tsdb.path=/prometheus", \
