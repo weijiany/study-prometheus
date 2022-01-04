@@ -7,12 +7,10 @@ services:
       - "9100:9100"
 
   prometheus:
-    image: prom/prometheus:v2.31.1
+    build: ./prometheus
     container_name: prometheus
     ports:
       - "9090:9090"
-    volumes:
-      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
     links:
       - node-exporter
     depends_on:
