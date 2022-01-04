@@ -6,6 +6,7 @@ alerting:
   alertmanagers:
     - static_configs:
         - targets:
+          - "alert-manager:9300"
 
 rule_files:
 

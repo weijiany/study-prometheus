@@ -31,3 +31,10 @@ services:
       - prometheus
     links:
       - node-exporter
+
+  alert-manager:
+    image: prom/alertmanager:v0.23.0
+    container_name: alert-manager
+    ports:
+      - "9300:9300"
+      - "9093:9093"
