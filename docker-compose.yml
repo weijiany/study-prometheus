@@ -6,6 +6,11 @@ services:
     ports:
       - "9100:9100"
 
+  spring-boot:
+    build: ./test-actuator
+    ports:
+      - "8080:8080"
+
   prometheus:
     build: ./prometheus
     container_name: prometheus
@@ -15,8 +20,10 @@ services:
       - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
     links:
       - node-exporter
+      - spring-boot
     depends_on:
       - node-exporter
+      - spring-boot
 
   grafana:
     image: grafana/grafana:8.3.0
