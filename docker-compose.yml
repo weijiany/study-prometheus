@@ -1,4 +1,4 @@
-version: "3.9"
+version: "2"
 services:
   node-exporter:
     image: prom/node-exporter:v1.3.0
@@ -8,6 +8,7 @@ services:
 
   spring-boot:
     build: ./test-actuator
+    container_name: spring-boot
     ports:
       - "8080:8080"
 
@@ -18,6 +19,7 @@ services:
       - "9090:9090"
     volumes:
       - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./prometheus/rules:/etc/prometheus/rules
     links:
       - node-exporter
       - spring-boot
