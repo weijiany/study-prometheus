@@ -23,9 +23,13 @@ services:
     links:
       - node-exporter
       - spring-boot
+      - black-box
+      - alert-manager
     depends_on:
       - node-exporter
       - spring-boot
+      - alert-manager
+      - black-box
 
   grafana:
     image: grafana/grafana:8.3.0
@@ -47,3 +51,9 @@ services:
     ports:
       - "9300:9300"
       - "9093:9093"
+
+  black-box:
+    image: prom/blackbox-exporter:v0.19.0
+    container_name: black-box
+    ports:
+      - "9115:9115"

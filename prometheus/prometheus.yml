@@ -16,12 +16,35 @@ scrape_configs:
     static_configs:
       - targets:
         - "localhost:9090"
+
   - job_name: "node-exporter"
     static_configs:
       - targets:
         - "node-exporter:9100"
+
   - job_name: "spring-boot"
     metrics_path: "/actuator/prometheus"
     static_configs:
       - targets:
         - "spring-boot:8080"
+
+  - job_name: "http_2xx"
+    metrics_path: /probe
+    params:
+      module:
+        - http_2xx
+    static_configs:
+      - targets:
+        - https://www.baidu.com
+        - https://www.bilibili.com
+    # refer to: https://github.com/prometheus/blackbox_exporter#prometheus-configuration
+    relabel_configs:
+      # use __address__ instead of __param_target
+      # __param_target: pass in __address__ url param
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      # use black-box:9155 instead of __address__, in order to call black-box and get response.
+      - target_label: __address__
+        replacement: black-box:9115
