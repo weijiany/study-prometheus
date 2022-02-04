@@ -1,5 +1,6 @@
 up:
 	docker-compose build prometheus --no-cache
+	docker-compose build alertmanager --no-cache
 	docker-compose up -d
 
 down:

@@ -24,11 +24,11 @@ services:
       - node-exporter
       - spring-boot
       - black-box
-      - alert-manager
+      - alertmanager
     depends_on:
       - node-exporter
       - spring-boot
-      - alert-manager
+      - alertmanager
       - black-box
 
   grafana:
@@ -45,12 +45,14 @@ services:
     links:
       - node-exporter
 
-  alert-manager:
-    image: prom/alertmanager:v0.23.0
-    container_name: alert-manager
+  alertmanager:
+    build: ./alertmanager
+    container_name: alertmanager
     ports:
       - "9300:9300"
       - "9093:9093"
+    environment:
+      - SLACK_URL
 
   black-box:
     image: prom/blackbox-exporter:v0.19.0

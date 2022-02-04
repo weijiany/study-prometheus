@@ -6,8 +6,10 @@ route:
   receiver: 'slack'
 receivers:
 - name: 'slack'
-  webhook_configs:
-  - url: 'http://127.0.0.1:5001/'
+  slack_configs:
+  - channel: '#study-alert-manager'
+    api_url: @will be replaced@
+    send_resolved: true
 inhibit_rules:
   - source_match:
       severity: 'critical'
